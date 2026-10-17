@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +15,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,6 +30,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun BiodataScreen() {
@@ -47,6 +52,8 @@ fun BiodataScreen() {
     var showError by remember { mutableStateOf(false) }
     var showExperienceMenu by remember { mutableStateOf(false) }
 
+    val purple = colorResource(R.color.purple_primary)
+    val secondaryText = colorResource(R.color.text_secondary)
     val whiteColor = colorResource(R.color.white)
 
     val validEmail = Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches()
@@ -93,6 +100,22 @@ fun BiodataScreen() {
                     ),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                Text(
+                    text = stringResource(R.string.form_title),
+                    color = purple,
+                    fontSize = dimensionResource(id = R.dimen.font_title).value.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_xs)))
+
+                Text(
+                    text = stringResource(R.string.form_subtitle),
+                    color = secondaryText,
+                    fontSize = dimensionResource(id = R.dimen.font_caption).value.sp
+                )
+
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_card_title)))
             }
         }
     }
