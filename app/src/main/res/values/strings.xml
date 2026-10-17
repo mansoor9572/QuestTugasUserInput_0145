@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">User Input</string>
+    <string name="form_title">Form Biodata</string>
+    <string name="form_subtitle">Silahkan isi biodata Anda dibawah ini !!!</string>
+
+    <string name="first_name">Nama Depan</string>
+    <string name="last_name">Nama Belakang</string>
+    <string name="email">Email</string>
+    <string name="birth_date">Tgl Lahir</string>
+    <string name="experience">Experience</string>
+
+    <string name="choose_skill">Pilih Skill Anda :</string>
+    <string name="skill_android">Android</string>
+    <string name="skill_uiux">UI/UX</string>
+    <string name="skill_web">Web</string>
+
+    <string name="proceed">Proceed</string>
+    <string name="select_date">Pilih Tgl Lahir</string>
+    <string name="cancel">Batal</string>
+    <string name="confirm">Konfirmasi</string>
+    <string name="select_experience">Pilih Experience</string>
+    <string name="experience_beginner">Beginner</string>
+    <string name="experience_intermediate">Intermediate</string>
+    <string name="experience_advanced">Advanced</string>
+
+    <string name="success_title">Form Berhasil Dikirim</string>
+    <string name="success_message">Informasi Anda telah berhasil dikirim.</string>
+    <string name="ok">OK</string>
+    <string name="error_required">Silakan lengkapi semua bidang dan pilih minimal satu skill.</string>
+    <string name="email_error">Silakan masukkan alamat email yang valid.</string>
+</resources>
