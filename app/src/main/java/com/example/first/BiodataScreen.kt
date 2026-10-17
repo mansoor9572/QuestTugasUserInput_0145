@@ -20,8 +20,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -189,55 +192,113 @@ fun BiodataScreen() {
 
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_lg)))
 
-                // Birth Date selector
-                OutlinedButton(
-                    onClick = {
-                        val calendar = Calendar.getInstance()
-                        DatePickerDialog(
-                            context,
-                            { _, year, month, day ->
-                                birthDate = String.format(
-                                    Locale.US,
-                                    "%02d/%02d/%04d",
-                                    day,
-                                    month + 1,
-                                    year
-                                )
-                            },
-                            calendar.get(Calendar.YEAR),
-                            calendar.get(Calendar.MONTH),
-                            calendar.get(Calendar.DAY_OF_MONTH)
-                        ).show()
-                    },
-                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_field)),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(dimensionResource(id = R.dimen.field_height)),
-                    border = BorderStroke(
-                        dimensionResource(id = R.dimen.border_thin),
-                        fieldBorder
-                    ),
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = if (birthDate.isNotBlank()) textColor else secondaryText
-                    )
+                // Birth Date & Experience Row
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacing_md)),
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text(
-                        text = birthDate.ifBlank {
-                            stringResource(R.string.birth_date)
+                    OutlinedButton(
+                        onClick = {
+                            val calendar = Calendar.getInstance()
+                            DatePickerDialog(
+                                context,
+                                { _, year, month, day ->
+                                    birthDate = String.format(
+                                        Locale.US,
+                                        "%02d/%02d/%04d",
+                                        day,
+                                        month + 1,
+                                        year
+                                    )
+                                },
+                                calendar.get(Calendar.YEAR),
+                                calendar.get(Calendar.MONTH),
+                                calendar.get(Calendar.DAY_OF_MONTH)
+                            ).show()
                         },
-                        modifier = Modifier.weight(1f),
-                        fontSize = dimensionResource(id = R.dimen.font_label).value.sp,
-                        maxLines = 1
-                    )
-                    Icon(
-                        imageVector = Icons.Default.CalendarMonth,
-                        contentDescription = stringResource(R.string.select_date),
-                        tint = textColor,
-                        modifier = Modifier.size(dimensionResource(id = R.dimen.icon_calendar_size))
-                    )
+                        shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_field)),
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(dimensionResource(id = R.dimen.field_height)),
+                        border = BorderStroke(
+                            dimensionResource(id = R.dimen.border_thin),
+                            fieldBorder
+                        ),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = if (birthDate.isNotBlank()) textColor else secondaryText
+                        )
+                    ) {
+                        Text(
+                            text = birthDate.ifBlank {
+                                stringResource(R.string.birth_date)
+                            },
+                            modifier = Modifier.weight(1f),
+                            fontSize = dimensionResource(id = R.dimen.font_label).value.sp,
+                            maxLines = 1
+                        )
+                        Icon(
+                            imageVector = Icons.Default.CalendarMonth,
+                            contentDescription = stringResource(R.string.select_date),
+                            tint = textColor,
+                            modifier = Modifier.size(dimensionResource(id = R.dimen.icon_calendar_size))
+                        )
+                    }
+
+                    Box(modifier = Modifier.weight(1f)) {
+                        OutlinedButton(
+                            onClick = { showExperienceMenu = true },
+                            shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_field)),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(dimensionResource(id = R.dimen.field_height)),
+                            border = BorderStroke(
+                                dimensionResource(id = R.dimen.border_thin),
+                                fieldBorder
+                            ),
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                contentColor = if (experience.isNotBlank()) textColor else secondaryText
+                            )
+                        ) {
+                            Text(
+                                text = experience.ifBlank {
+                                    stringResource(R.string.experience)
+                                },
+                                modifier = Modifier.weight(1f),
+                                fontSize = dimensionResource(id = R.dimen.font_label).value.sp,
+                                maxLines = 1
+                            )
+                            Icon(
+                                imageVector = Icons.Default.ArrowDropDown,
+                                contentDescription = stringResource(R.string.select_experience),
+                                tint = textColor
+                            )
+                        }
+
+                        val experienceOptions = listOf(
+                            stringResource(R.string.experience_beginner),
+                            stringResource(R.string.experience_intermediate),
+                            stringResource(R.string.experience_advanced)
+                        )
+
+                        DropdownMenu(
+                            expanded = showExperienceMenu,
+                            onDismissRequest = { showExperienceMenu = false }
+                        ) {
+                            experienceOptions.forEach { optionText ->
+                                DropdownMenuItem(
+                                    text = { Text(optionText) },
+                                    onClick = {
+                                        experience = optionText
+                                        showExperienceMenu = false
+                                    }
+                                )
+                            }
+                        }
+                    }
                 }
 
-                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_lg)))
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_xl)))
             }
         }
     }
