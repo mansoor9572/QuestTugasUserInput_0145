@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Heights & Widths -->
+    <dimen name="header_image_height">270dp</dimen>
+    <dimen name="card_top_padding">220dp</dimen>
+    <dimen name="field_height">54dp</dimen>
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="icon_calendar_size">20dp</dimen>
+    <dimen name="checkbox_size">24dp</dimen>
+    <dimen name="border_thin">1dp</dimen>
+
+    <!-- Corners -->
+    <dimen name="corner_card_top">32dp</dimen>
+    <dimen name="corner_field">15dp</dimen>
+    <dimen name="corner_button">14dp</dimen>
+
+    <!-- Spacing & Padding -->
+    <dimen name="spacing_xxs">4dp</dimen>
+    <dimen name="spacing_xs">6dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">10dp</dimen>
+    <dimen name="spacing_lg">14dp</dimen>
+    <dimen name="spacing_xl">20dp</dimen>
+    <dimen name="padding_card">24dp</dimen>
+    <dimen name="spacing_card_title">26dp</dimen>
+    <dimen name="spacing_button_top">28dp</dimen>
+
+    <!-- Font Sizes -->
+    <dimen name="font_title">25sp</dimen>
+    <dimen name="font_button">15sp</dimen>
+    <dimen name="font_label">13sp</dimen>
+    <dimen name="font_body">12sp</dimen>
+    <dimen name="font_caption">11sp</dimen>
+</resources>
