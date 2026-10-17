@@ -3,8 +3,10 @@ package com.example.first
 import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -116,7 +120,55 @@ fun BiodataScreen() {
                 )
 
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_card_title)))
+
+                // First name & Last name
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacing_md)),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    OutlinedTextField(
+                        value = firstName,
+                        onValueChange = { firstName = it },
+                        placeholder = {
+                            Text(
+                                stringResource(R.string.first_name),
+                                fontSize = dimensionResource(id = R.dimen.font_label).value.sp
+                            )
+                        },
+                        singleLine = true,
+                        shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_field)),
+                        modifier = Modifier.weight(1f),
+                        colors = fieldColors()
+                    )
+
+                    OutlinedTextField(
+                        value = lastName,
+                        onValueChange = { lastName = it },
+                        placeholder = {
+                            Text(
+                                stringResource(R.string.last_name),
+                                fontSize = dimensionResource(id = R.dimen.font_label).value.sp
+                            )
+                        },
+                        singleLine = true,
+                        shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_field)),
+                        modifier = Modifier.weight(1f),
+                        colors = fieldColors()
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_lg)))
             }
         }
     }
 }
+
+@Composable
+private fun fieldColors() = OutlinedTextFieldDefaults.colors(
+    focusedBorderColor = colorResource(R.color.purple_primary),
+    unfocusedBorderColor = colorResource(R.color.field_border),
+    focusedTextColor = colorResource(R.color.text_primary),
+    unfocusedTextColor = colorResource(R.color.text_primary),
+    focusedPlaceholderColor = colorResource(R.color.text_secondary),
+    unfocusedPlaceholderColor = colorResource(R.color.text_secondary)
+)
