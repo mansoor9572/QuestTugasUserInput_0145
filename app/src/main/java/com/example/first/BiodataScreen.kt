@@ -53,7 +53,9 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.example.first.ui.theme.FirstTheme
 import java.util.Calendar
 import java.util.Locale
 
@@ -437,5 +439,13 @@ private fun SkillCheckbox(
             fontSize = dimensionResource(id = R.dimen.font_body).value.sp,
             color = colorResource(R.color.text_primary)
         )
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun BiodataScreenPreview() {
+    FirstTheme {
+        BiodataScreen()
     }
 }
