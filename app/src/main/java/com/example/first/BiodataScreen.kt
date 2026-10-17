@@ -23,6 +23,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -35,6 +36,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -371,6 +373,31 @@ fun BiodataScreen() {
                 }
             }
         }
+    }
+
+    if (showSuccess) {
+        AlertDialog(
+            onDismissRequest = { showSuccess = false },
+            title = { Text(stringResource(R.string.success_title)) },
+            text = { Text(stringResource(R.string.success_message)) },
+            confirmButton = {
+                TextButton(onClick = { showSuccess = false }) {
+                    Text(stringResource(R.string.ok))
+                }
+            }
+        )
+    }
+
+    if (showError) {
+        AlertDialog(
+            onDismissRequest = { showError = false },
+            title = { Text(stringResource(R.string.error_required)) },
+            confirmButton = {
+                TextButton(onClick = { showError = false }) {
+                    Text(stringResource(R.string.ok))
+                }
+            }
+        )
     }
 }
 
