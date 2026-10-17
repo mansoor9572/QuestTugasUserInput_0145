@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -23,6 +24,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -299,6 +302,17 @@ fun BiodataScreen() {
                 }
 
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_xl)))
+
+                // Skill selection header label
+                Text(
+                    text = stringResource(R.string.choose_skill),
+                    color = textColor,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = dimensionResource(id = R.dimen.font_label).value.sp,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_sm)))
             }
         }
     }
@@ -313,3 +327,32 @@ private fun fieldColors() = OutlinedTextFieldDefaults.colors(
     focusedPlaceholderColor = colorResource(R.color.text_secondary),
     unfocusedPlaceholderColor = colorResource(R.color.text_secondary)
 )
+
+@Composable
+private fun SkillCheckbox(
+    label: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Checkbox(
+            checked = checked,
+            onCheckedChange = onCheckedChange,
+            colors = CheckboxDefaults.colors(
+                checkedColor = colorResource(R.color.purple_primary),
+                uncheckedColor = colorResource(R.color.field_border)
+            ),
+            modifier = Modifier.size(dimensionResource(id = R.dimen.checkbox_size))
+        )
+
+        Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.spacing_xs)))
+
+        Text(
+            text = label,
+            fontSize = dimensionResource(id = R.dimen.font_body).value.sp,
+            color = colorResource(R.color.text_primary)
+        )
+    }
+}
