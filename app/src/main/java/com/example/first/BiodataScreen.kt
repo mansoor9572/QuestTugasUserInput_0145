@@ -313,6 +313,33 @@ fun BiodataScreen() {
                 )
 
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_sm)))
+
+                // Skill Checkboxes Row
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    SkillCheckbox(
+                        label = stringResource(R.string.skill_android),
+                        checked = androidSkill,
+                        onCheckedChange = { androidSkill = it }
+                    )
+
+                    SkillCheckbox(
+                        label = stringResource(R.string.skill_uiux),
+                        checked = uiuxSkill,
+                        onCheckedChange = { uiuxSkill = it }
+                    )
+
+                    SkillCheckbox(
+                        label = stringResource(R.string.skill_web),
+                        checked = webSkill,
+                        onCheckedChange = { webSkill = it }
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_button_top)))
             }
         }
     }
