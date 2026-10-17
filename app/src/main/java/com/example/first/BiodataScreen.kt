@@ -1,6 +1,8 @@
 package com.example.first
 
+import android.app.DatePickerDialog
 import android.util.Patterns
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -13,9 +15,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
@@ -37,6 +45,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import java.util.Calendar
+import java.util.Locale
 
 @Composable
 fun BiodataScreen() {
@@ -57,6 +67,8 @@ fun BiodataScreen() {
     var showExperienceMenu by remember { mutableStateOf(false) }
 
     val purple = colorResource(R.color.purple_primary)
+    val fieldBorder = colorResource(R.color.field_border)
+    val textColor = colorResource(R.color.text_primary)
     val secondaryText = colorResource(R.color.text_secondary)
     val whiteColor = colorResource(R.color.white)
 
@@ -174,6 +186,56 @@ fun BiodataScreen() {
                     modifier = Modifier.fillMaxWidth(),
                     colors = fieldColors()
                 )
+
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_lg)))
+
+                // Birth Date selector
+                OutlinedButton(
+                    onClick = {
+                        val calendar = Calendar.getInstance()
+                        DatePickerDialog(
+                            context,
+                            { _, year, month, day ->
+                                birthDate = String.format(
+                                    Locale.US,
+                                    "%02d/%02d/%04d",
+                                    day,
+                                    month + 1,
+                                    year
+                                )
+                            },
+                            calendar.get(Calendar.YEAR),
+                            calendar.get(Calendar.MONTH),
+                            calendar.get(Calendar.DAY_OF_MONTH)
+                        ).show()
+                    },
+                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_field)),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(dimensionResource(id = R.dimen.field_height)),
+                    border = BorderStroke(
+                        dimensionResource(id = R.dimen.border_thin),
+                        fieldBorder
+                    ),
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        contentColor = if (birthDate.isNotBlank()) textColor else secondaryText
+                    )
+                ) {
+                    Text(
+                        text = birthDate.ifBlank {
+                            stringResource(R.string.birth_date)
+                        },
+                        modifier = Modifier.weight(1f),
+                        fontSize = dimensionResource(id = R.dimen.font_label).value.sp,
+                        maxLines = 1
+                    )
+                    Icon(
+                        imageVector = Icons.Default.CalendarMonth,
+                        contentDescription = stringResource(R.string.select_date),
+                        tint = textColor,
+                        modifier = Modifier.size(dimensionResource(id = R.dimen.icon_calendar_size))
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_lg)))
             }
