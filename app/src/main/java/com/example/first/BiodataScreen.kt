@@ -23,6 +23,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
@@ -340,6 +341,34 @@ fun BiodataScreen() {
                 }
 
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_button_top)))
+
+                // Proceed Button
+                Button(
+                    onClick = {
+                        if (formIsValid) {
+                            showSuccess = true
+                        } else {
+                            showError = true
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(dimensionResource(id = R.dimen.button_height)),
+                    enabled = formIsValid,
+                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_button)),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = purple,
+                        contentColor = whiteColor,
+                        disabledContainerColor = colorResource(R.color.disabled_button),
+                        disabledContentColor = whiteColor
+                    )
+                ) {
+                    Text(
+                        text = stringResource(R.string.proceed),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = dimensionResource(id = R.dimen.font_button).value.sp
+                    )
+                }
             }
         }
     }
