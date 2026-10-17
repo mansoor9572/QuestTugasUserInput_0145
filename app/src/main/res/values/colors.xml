@@ -1,0 +1,13 @@
+
+<resources>
+    <color name="purple_primary">#7138C8</color>
+    <color name="purple_neon">#C500FF</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="text_primary">#FF292936</color>
+    <color name="text_secondary">#FF85858B</color>
+    <color name="field_border">#FF777783</color>
+    <color name="disabled_button">#FFE0E0E0</color>
+    <color name="disabled_text">#FFFFFFFF</color>
+    <color name="screen_background">#FFF9F6FF</color>
+</resources>
